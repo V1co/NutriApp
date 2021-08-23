@@ -1,11 +1,12 @@
-import React, { useState } from "react"
+import { useContext } from "react"
+import { StateContext } from '../Helpers/Context'
 
 export default function SearchData() {
 
-    const [ query, setQuery ] = useState("")
-    const [ products, setProducts ] = useState([])
-    const [ filters, setFilters ] = useState([])
-    const [ number, setNumber ] = useState('100')
+    const { number, setNumber } = useContext(StateContext)
+    const { query, setQuery } = useContext(StateContext)
+    const { products, setProducts } = useContext(StateContext)
+    const { filters, setFilters } = useContext(StateContext)
 
     /* function filterFood(name) {
         return name === "Survey (FNDDS)"
