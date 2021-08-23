@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { StateContext } from '../Helpers/Context'
+const axios = require('axios');
 
 export default function SearchData() {
 
@@ -8,25 +9,25 @@ export default function SearchData() {
     const { products, setProducts } = useContext(StateContext)
     const { filters, setFilters } = useContext(StateContext)
 
-    /* function filterFood(name) {
+    /*
+        function filterFood(name) {
         return name === "Survey (FNDDS)"
     }*/
 
     // https://api.nal.usda.gov/fdc/v1/foods/search?query=lemon&pageSize=3&api_key=iNgeDchKdPTwNKfT8az2Mr5D3htK8vFd0U92vmwQ
     // All data are based on 100g of product
 
-    const fetchData = async (e) => {
+    const getData = async (e) => {
         e.preventDefault()
 
        const apiKey = "iNgeDchKdPTwNKfT8az2Mr5D3htK8vFd0U92vmwQ"
        const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${query}&pageSize=3&api_key=${apiKey}`
 
         try {
-            const response = await fetch(url)
-            const data = await response.json()
+            const response = await axios.get(url)
+            const data = await response.data
             console.log(data)
             setProducts(data.foods)
-
         } catch (error) {
             console.log(error)
         }
@@ -42,7 +43,7 @@ export default function SearchData() {
 
     return (
         <>
-            <form className="form" onSubmit={fetchData}>
+            <form className="form" onSubmit={getData}>
                 <label className="label" htmlFor="query">Product name</label>
                 <input
                     className="input"
