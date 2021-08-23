@@ -1,13 +1,18 @@
-import { Container, Name, Nutrient } from './styles/product'
+import { Container, Nutrient, Name, Value } from './styles/product'
+import React from "react"
 
-export default function Product() {
-    <Container></Container>
+export default function Product({ children, ...restProps }) {
+    return <Container {...restProps}>{children}</Container>
 }
 
-Product.Name = function ProductName() {
-    return <Name></Name>
+Product.Nutrient = function ProductNutrient({ children }) {
+    return <Nutrient>{children}</Nutrient>
 }
 
-Product.Nutrient = function ProductNutrient() {
-    return <Nutrient></Nutrient>
+Product.Name = function ProductName({ children }) {
+    return <Name>{children}</Name>
+}
+
+Product.Value = function ProductValue({ children }) {
+    return <Value>{children}</Value>
 }
