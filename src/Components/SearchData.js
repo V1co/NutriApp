@@ -4,11 +4,15 @@ export default function SearchData() {
 
     const [ query, setQuery ] = useState("")
     const [ products, setProducts ] = useState([])
-    // const [ filters, setFilters ] = useState([])
+    const [ filters, setFilters ] = useState([])
+    const [ number, setNumber ] = useState('100')
 
     /* function filterFood(name) {
         return name === "Survey (FNDDS)"
     }*/
+
+    // https://api.nal.usda.gov/fdc/v1/foods/search?query=lemon&pageSize=3&api_key=iNgeDchKdPTwNKfT8az2Mr5D3htK8vFd0U92vmwQ
+    // All data are based on 100g of product
 
     const fetchData = async (e) => {
         e.preventDefault()
@@ -27,6 +31,14 @@ export default function SearchData() {
         }
     }
 
+    const handleFiltersChange = (e) => {
+        const { checked, name } = e.target
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            [name]: checked
+        }))
+    }
+
     return (
         <>
             <form className="form" onSubmit={fetchData}>
@@ -37,20 +49,36 @@ export default function SearchData() {
                     name="query"
                     placeholder="i.e. Avocado"
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}/>
+                    onChange={(e) => setQuery(e.target.value)}
+                    />
                 <button className="button">Search</button>
             </form>
 
             <form>
                 <label>
-                    <input type="checkbox" value="sodium" onClick={(e) => console.log(e.target.value)}></input>
+                    <input type="checkbox" name="Sodium" value="false" onClick={handleFiltersChange}></input>
                     Sodium
                 </label>
                 <label>
-                    <input type="checkbox" value="iron" onClick={(e) => console.log(e.target.value)}></input>
+                    <input type="checkbox" name="Iron" value="false" onClick={handleFiltersChange}></input>
                     Iron
                 </label>
+                <label>
+                    <input type="checkbox" name="Potassium" value="false" onClick={handleFiltersChange}></input>
+                    Potassium
+                </label>
             </form>
+
+            <h2>How much of product you need?</h2>
+            <input
+                className="input"
+                type="text"
+                name="query"
+                placeholder="i.e. 100g"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+            />
+            <label className="label" htmlFor="query">Grams</label>
 
             <div className="products-list">
                 {products.map(product => (
@@ -59,12 +87,19 @@ export default function SearchData() {
                         <ul className="nutrients_details">
                             {product.foodNutrients.map(item => (
                                 <li key={item.nutrientId}>
-                                    {item.nutrientName}: {item.value}{item.unitName.toLowerCase()}</li>
+                                    {item.nutrientName}: {item.value * number * 0.01}{item.unitName.toLowerCase()}
+                                </li>
+                            ))}
+                            {product.foodNutrients.map(item => (
+                                <li key={item.nutrientId}>
+                                    {item.nutrientName}: {item.value * number * 0.01}{item.unitName.toLowerCase()}
+                                </li>
                             ))}
                         </ul>
                     </div>
                 ))}
             </div>
+            {console.log(filters)}
         </>
     )
 }
