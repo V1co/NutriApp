@@ -1,12 +1,10 @@
 import { useContext } from "react"
 import { StateContext } from '../Helpers/Context'
-const axios = require('axios');
 
 export default function SearchData() {
 
     const { number, setNumber } = useContext(StateContext)
-    const { query, setQuery } = useContext(StateContext)
-    const { products, setProducts } = useContext(StateContext)
+    const { products } = useContext(StateContext)
     const { filters, setFilters } = useContext(StateContext)
 
     /*
@@ -16,22 +14,6 @@ export default function SearchData() {
 
     // https://api.nal.usda.gov/fdc/v1/foods/search?query=lemon&pageSize=3&api_key=iNgeDchKdPTwNKfT8az2Mr5D3htK8vFd0U92vmwQ
     // All data are based on 100g of product
-
-    const getData = async (e) => {
-        e.preventDefault()
-
-       const apiKey = "iNgeDchKdPTwNKfT8az2Mr5D3htK8vFd0U92vmwQ"
-       const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${query}&pageSize=3&api_key=${apiKey}`
-
-        try {
-            const response = await axios.get(url)
-            const data = await response.data
-            console.log(data)
-            setProducts(data.foods)
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     const handleFiltersChange = (e) => {
         const { checked, name } = e.target
@@ -43,19 +25,6 @@ export default function SearchData() {
 
     return (
         <>
-            <form className="form" onSubmit={getData}>
-                <label className="label" htmlFor="query">Product name</label>
-                <input
-                    className="input"
-                    type="text"
-                    name="query"
-                    placeholder="i.e. Avocado"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    />
-                <button className="button">Search</button>
-            </form>
-
             <form>
                 <label>
                     <input type="checkbox" name="Sodium" value="false" onClick={handleFiltersChange}></input>
