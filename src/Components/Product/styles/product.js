@@ -38,3 +38,34 @@ export const Nutrient = styled.p`
 export const Value = styled.span`
     float: right;
 `;
+
+export const Link = styled.button`
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+
+    font-size: 15px;
+    color: black;
+    background-color: white;
+    outline: none;
+    border: 0px solid #F8F8F8;
+    text-align: left;
+    padding-left: 14px;
+    margin: 16px 0 6px 0;
+    text-decoration: none;
+    padding: 5px 10px 5px 10px;
+    border-bottom: 1px solid black;
+`;
+
+export const RoutingLink = styled.a`
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+
+    font-size: 15px;
+    color: black;
+    text-align: left;
+    padding-left: 14px;
+    margin: 16px 0 6px 0;
+    text-decoration: none;
+    padding: 5px 10px 5px 10px;
+    border-bottom: 1px solid black;
+`;

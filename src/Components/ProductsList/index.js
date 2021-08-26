@@ -2,30 +2,43 @@ import { Container, Title, List } from './styles/productslist'
 import { useContext } from "react"
 import { StateContext } from '../../Helpers/Context'
 import Product from '../Product/index'
+import { useHistory } from 'react-router-dom'
 
 export default function ProductsList() {
-    const { products, grams, query } = useContext(StateContext)
+    const { products, query, setValue } = useContext(StateContext)
+    let index = 0
+
+    const history = useHistory()
+
+    const handleClick = async (e) => {
+
+        let item = products[e.target.value]
+        // console.log('clicked: ' + item.description)
+        await setValue(item)
+
+        return(
+            window.scrollTo(0, 0),
+            history.push('/product-details')
+        )
+    }
 
     return (
+        <>
         <Container>
-            {query.length <= 2? console.error('Query must have at least 3 characters') : ``}
+            {query.length <= 2? console.log('Query must have at least 3 characters') : ``}
             {products.length > 0? <Title>Matched products:</Title> : ''}
             <List key="products">
                 {products.map(item => (
-                    <Product id={item.fdcId}>
-                        <Product.Name id={item.description}>{item.description}</Product.Name>
-                        {item.foodNutrients.map(p => (
-                            <Product.Nutrient id={item.nutrientId}>{p.nutrientName}:
-                                <Product.Value>{p.value * grams * 0.01}{p.unitName.toLowerCase()}</Product.Value>
-                            </Product.Nutrient>
-                        ))}
+                    <Product>
+                        <Product.Link id={item.description} href='/product-details' value={index++} onClick={handleClick}>{item.description}</Product.Link>
                     </Product>
                 ))}
             </List>
         </Container>
+        </>
     )
 }
-
+// href={'/product/' + item.fdcId}
 /*
 {products.map(product => (
     <div className="product" key={product.fdcId}>
@@ -43,5 +56,4 @@ export default function ProductsList() {
             ))}
         </ul>
     </div>
-))}
-*/
+))}*/

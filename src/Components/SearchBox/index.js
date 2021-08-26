@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 export default function SearchBox() {
-    const { query, setQuery, setProducts } = useContext(StateContext)
+    const { query, setQuery, setProducts, pageSize } = useContext(StateContext)
 
     return (
         <Container>
@@ -19,7 +19,7 @@ export default function SearchBox() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search product"
             />
-            <SearchSubmit type="submit" onClick={() => SearchData(query, setProducts)}>Search</SearchSubmit>
+            <SearchSubmit type="submit" onClick={() => SearchData(query, setProducts, pageSize)}>Search</SearchSubmit>
         </Container>
     )
 }
