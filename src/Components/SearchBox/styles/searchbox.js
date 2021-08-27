@@ -5,7 +5,7 @@ export const Container = styled.div`
     align-items: center;
     background-color: #E8E8E8;
     margin: 10px;
-    width: 580px;
+    width: 96%;
 `;
 
 export const SearchIconWrapper = styled.div`

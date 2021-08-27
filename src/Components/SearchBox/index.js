@@ -4,9 +4,11 @@ import { StateContext } from '../../Helpers/Context'
 import SearchData from '../../Helpers/GetData'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { useHistory } from 'react-router-dom'
 
 export default function SearchBox() {
-    const { query, setQuery, setProducts, pageSize } = useContext(StateContext)
+    const { query, setQuery, setProducts, pageSize, setIsLoading } = useContext(StateContext)
+    const history = useHistory()
 
     return (
         <Container>
@@ -19,7 +21,7 @@ export default function SearchBox() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search product"
             />
-            <SearchSubmit type="submit" onClick={() => SearchData(query, setProducts, pageSize)}>Search</SearchSubmit>
+            <SearchSubmit type="submit" onClick={() => { SearchData(query, setProducts, pageSize, setIsLoading); history.push('/search')} }>Search</SearchSubmit>
         </Container>
     )
 }

@@ -6,11 +6,11 @@ export const Container = styled.div`
 `;
 
 export const Name = styled.p`
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
     color: black;
     text-align: left;
-    padding-left: 14px;
+    padding-left: 9px;
     margin: 16px 0 6px 0;
 `;
 
@@ -27,12 +27,23 @@ export const Nutrient = styled.p`
     font-weight: 100;
     font-size: 13px;
     color: #333333;
-    margin: 0 5px;
+    margin: 0px;
     text-align: left;
 
     &:last-child {
         border-bottom: 0;
     }
+`;
+
+export const Gram = styled.input`
+    width: 88%;
+    border: 0px solid #F8F8F8;
+    background-color: #E8E8E8;
+    padding: 5px;
+    height: 20px;
+    outline: none;
+    float: right;
+    margin-top: 20px;
 `;
 
 export const Value = styled.span`
