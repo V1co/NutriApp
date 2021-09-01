@@ -16,5 +16,6 @@ export const SIGN_UP = '/signup';
 export const TERMS = '/terms';
 export const PRODUCT_DETAILS = '/product-details';
 export const SEARCH = '/search';
+export const SETTINGS = '/settings';
 
 export const HOME = '/';

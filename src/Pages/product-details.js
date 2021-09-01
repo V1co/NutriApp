@@ -13,9 +13,10 @@ export default function ProductDetails() {
     let item = JSON.parse(localStorage.value)
     const { grams, setGrams } = useContext(StateContext)
 
-    /*const handleChange = (e) => {
-        setGrams(e.target.value)
-    }*/
+    const handleConfirm = () => {
+        console.log('item has been saved')
+        // setSavedProduct(...savedProduct, item.description)
+    }
 
     return(
         <div style={{width: "100%"}}>
@@ -23,7 +24,7 @@ export default function ProductDetails() {
                 <FontAwesomeIcon icon={faArrowLeft} color="#555555" style={{padding: "10px"}}/>
             </Link>
             <Link to={ROUTES.HOME}>
-                <FontAwesomeIcon icon={faCheckCircle} color="#555555" style={{float: "right", padding: "10px"}}/>
+                <FontAwesomeIcon icon={faCheckCircle} onClick={handleConfirm} color="#555555" style={{float: "right", padding: "10px"}}/>
             </Link>
             <Product id={item.fdcId}>
                 <Product.Name id={item.description}>{item.description}</Product.Name>

@@ -1,4 +1,4 @@
-import { Container, Nutrient, Link, Value, Name, Gram, GramLabel } from './styles/product'
+import { Container, Nutrient, Link, Value, Name, Gram } from './styles/product'
 import React from "react"
 
 export default function Product({ children, ...restProps }) {
