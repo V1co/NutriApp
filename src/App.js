@@ -19,9 +19,9 @@ function App() {
   const [ grams, setGrams ] = useState('100')
   const [ query, setQuery ] = useState("")
   const [ products, setProducts ] = useState([])
-  const [ filters, setFilters ] = useState([])
+  const [ filters, setFilters ] = useState({ Sodium: true, Potassium: true, Iron: true, "Vitamin C": true })
   const [ pageSize, setPageSize ] = useState('20')
-  const [ isLoading, setIsLoading ] = useState(false)
+  const [ isLoading, setIsLoading ] = useState()
   const [ savedProduct, setSavedProduct ] = useState([])
   const [ nav, setNav ] = useState(false)
 
@@ -61,7 +61,6 @@ function App() {
             </Navigation>
             <h2>Nutri App</h2>
             <SearchBox />
-            {console.log(savedProduct)}
             <h4>{savedProduct}</h4>
           </div>
         </Route>

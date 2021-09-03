@@ -2,22 +2,22 @@ import styled, { keyframes } from 'styled-components';
 import { Link as RouterLink }  from "react-router-dom";
 
 const animateIn = keyframes`
-  0%   {background-color:#999999; left:600px; top:0px;}
-  33%  {background-color:#999999; left:400px; top:0px;}
-  66%  {background-color:#999999; left:200px; top:0px;}
-  100% {background-color:#999999; left:0px; top:0px;}
+  0%   {background-color:#303030; left:600px; top:0px;}
+  33%  {background-color:#303030; left:400px; top:0px;}
+  66%  {background-color:#303030; left:200px; top:0px;}
+  100% {background-color:#303030; left:0px; top:0px;}
 `;
 
 const animateOut = keyframes`
-  0%   {background-color:red; right:600px; top:0px;}
-  33%  {background-color:red; right:400px; top:0px;}
-  66%  {background-color:#999999; right:200px; top:0px;}
-  100% {background-color:#999999; right:0px; top:0px;}
+  0%   {background-color:#303030; right:600px; top:0px;}
+  33%  {background-color:#303030; right:400px; top:0px;}
+  66%  {background-color:#303030; right:200px; top:0px;}
+  100% {background-color:#303030; right:0px; top:0px;}
 `;
 
 export const Container = styled.nav`
     position: fixed;
-    background: #999999;
+    background: #303030;
     color: white;
     animation: ${animateOut} 250ms ease-out;
 `;

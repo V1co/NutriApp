@@ -11,11 +11,27 @@ import { StateContext } from '../Helpers/Context'
 export default function ProductDetails() {
 
     let item = JSON.parse(localStorage.value)
-    const { grams, setGrams } = useContext(StateContext)
+    const { grams, setGrams, filters, setFilters } = useContext(StateContext)
 
     const handleConfirm = () => {
         console.log('item has been saved')
         // setSavedProduct(...savedProduct, item.description)
+    }
+
+    const handleFiltersChange = (e) => {
+        const { checked, name } = e.target
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            [name]: checked
+        }))
+    }
+
+    const filtersArray = []
+
+    for (var key in filters) {
+        if (filters[key] === true) {
+            filtersArray.push(key)
+        }
     }
 
     return(
@@ -26,6 +42,38 @@ export default function ProductDetails() {
             <Link to={ROUTES.HOME}>
                 <FontAwesomeIcon icon={faCheckCircle} onClick={handleConfirm} color="#555555" style={{float: "right", padding: "10px"}}/>
             </Link>
+
+            <form>
+                <label>
+                    <input type="checkbox" name="Sodium" value="true" defaultChecked onClick={handleFiltersChange}></input>
+                    Sodium
+                </label>
+                <label>
+                    <input type="checkbox" name="Iron" value="true" defaultChecked onClick={handleFiltersChange}></input>
+                    Iron
+                </label>
+                <label>
+                    <input type="checkbox" name="Potassium" value="true" defaultChecked onClick={handleFiltersChange}></input>
+                    Potassium
+                </label>
+                <label>
+                    <input type="checkbox" name="Protein" value="false" onClick={handleFiltersChange}></input>
+                    Protein
+                </label>
+                <label>
+                    <input type="checkbox" name="Zinc" value="false" onClick={handleFiltersChange}></input>
+                    Zinc
+                </label>
+                <label>
+                    <input type="checkbox" name="Vitamin C" value="false" defaultChecked onClick={handleFiltersChange}></input>
+                    Vitamin C
+                </label>
+                <label>
+                    <input type="checkbox" name="Magnesium" value="false" onClick={handleFiltersChange}></input>
+                    Magnesium
+                </label>
+            </form>
+
             <Product id={item.fdcId}>
                 <Product.Name id={item.description}>{item.description}</Product.Name>
                 <Portion>
@@ -39,10 +87,11 @@ export default function ProductDetails() {
                     <Portion.Type>Grams</Portion.Type>
                 </Portion>
                 {item.foodNutrients.map(i => (
-                    <Product.Nutrient id={item.nutrientId}>{i.nutrientName}:
-                        <Product.Value>{i.value * grams * 0.01}{i.unitName.toLowerCase()}</Product.Value>
-                    </Product.Nutrient>
-                    ))}
+                filtersArray.map(f => (i.nutrientName.includes(f) === true)?
+                <Product.Nutrient id={item.nutrientId}>{i.nutrientName}:
+                    <Product.Value>{i.value * grams * 0.01}{i.unitName.toLowerCase()}</Product.Value>
+                </Product.Nutrient> : ''
+            )))}
             </Product>
         </div>
     )
